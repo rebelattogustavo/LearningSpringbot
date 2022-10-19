@@ -30,7 +30,7 @@ public class LivroController {
         }
         Livros livro = new Livros();
         BeanUtils.copyProperties(livroDTO, livro);
-        livro.setStatus(Status.AGUARDANDO_EDICAO);
+        livro.setStatus(Status.AGUARDANDO_REVISAO);
         return ResponseEntity.status(HttpStatus.CREATED).body(livroService.save(livro));
     }
 
@@ -41,7 +41,7 @@ public class LivroController {
         }
         Livros livroModel = livroService.findById(livroDTO.getIsbn()).get();
         BeanUtils.copyProperties(livroDTO, livroModel);
-        livroModel.setStatus(livroModel.getStatus());
+        livroModel.setStatus(Status.AGUARDANDO_REVISAO);
         return ResponseEntity.status(HttpStatus.OK).body(livroService.save(livroModel));
     }
 
@@ -60,7 +60,7 @@ public class LivroController {
         Optional<Livros> livroOptional = livroService.findByStatus(status);
         if (livroOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("O livro com o status " + status + " não foi encontrado.");
+                    .body("Não há livros com o status " + status + "!.");
         }
         return ResponseEntity.status(HttpStatus.FOUND).body(livroOptional.get());
     }
@@ -90,7 +90,7 @@ public class LivroController {
         if (livroService.existsById(isbn)) {
             livroService.deleteById(isbn);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body("Livro com o ISBN" +isbn+ " deletado com sucesso.");
+                    .body("Livro com o ISBN " +isbn+ " deletado com sucesso.");
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body("O livro com o ISBN " + isbn + " não foi encontrado.");

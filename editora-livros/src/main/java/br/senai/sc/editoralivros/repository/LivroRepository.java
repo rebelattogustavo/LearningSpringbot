@@ -6,11 +6,13 @@ import br.senai.sc.editoralivros.model.entity.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface LivroRepository extends JpaRepository<Livros, Long> {
 
     Optional<Livros> findByStatus(Status status);
-    Optional<Livros> findByAutor(Autor autor);
+    Optional<Livros> findByAutores(Autor autor);
+    List<Livros> findByIsbnAndStatus(Long isbn, Status status);
 }

@@ -32,8 +32,10 @@ public class LivroService {
     }
 
     public Optional<Livros> findByAutor(Autor autor) {
-        return livroRepository.findByAutor(autor);
+        return livroRepository.findByAutores(autor);
     }
+
+
 
     public List<Livros> findAll() {
         return livroRepository.findAll();
