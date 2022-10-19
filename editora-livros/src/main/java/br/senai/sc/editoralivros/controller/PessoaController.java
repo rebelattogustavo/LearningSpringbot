@@ -30,7 +30,6 @@ public class PessoaController {
 
     @PostMapping
     public ResponseEntity<Object> save(@RequestBody @Valid PessoaDTO pessoaDTO) {
-        System.out.println("aa");
         if(pessoaService.existsById(pessoaDTO.getCpf())) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(Collections.singletonMap("message", "CPF já cadastrado!"));
