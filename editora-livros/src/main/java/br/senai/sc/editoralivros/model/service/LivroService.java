@@ -5,6 +5,8 @@ import br.senai.sc.editoralivros.model.entity.Livros;
 import br.senai.sc.editoralivros.model.entity.Status;
 import br.senai.sc.editoralivros.repository.LivroRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,10 +37,12 @@ public class LivroService {
         return livroRepository.findByAutores(autor);
     }
 
-
-
     public List<Livros> findAll() {
         return livroRepository.findAll();
+    }
+
+    public Page<Livros> findAll(Pageable pageable) {
+        return livroRepository.findAll(pageable);
     }
 
     public void deleteById(Long isbn) {

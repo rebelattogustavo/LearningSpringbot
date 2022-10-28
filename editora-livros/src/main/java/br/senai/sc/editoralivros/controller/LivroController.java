@@ -5,12 +5,18 @@ import br.senai.sc.editoralivros.model.entity.Autor;
 import br.senai.sc.editoralivros.model.entity.Livros;
 import br.senai.sc.editoralivros.model.entity.Status;
 import br.senai.sc.editoralivros.model.service.LivroService;
+import br.senai.sc.editoralivros.utils.LivroUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -23,13 +29,17 @@ public class LivroController {
     LivroService livroService;
 
     @PostMapping
-    public ResponseEntity<Object> save(@RequestBody @Valid LivroDTO livroDTO) {
-        if (livroService.existsById(livroDTO.getIsbn())) {
+    public ResponseEntity<Object> save(
+            @RequestParam("livro") String livroJson,
+            @RequestParam("arquivo") MultipartFile file) {
+
+        LivroUtil util = new LivroUtil();
+        Livros livro = util.converterJsonToModel(livroJson);
+        if (livroService.existsById(livro.getIsbn())) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body("Há um livro com o ISBN " + livroDTO.getIsbn() + " cadastrado.");
+                    .body("Há um livro com o ISBN " + livro.getIsbn() + " cadastrado.");
         }
-        Livros livro = new Livros();
-        BeanUtils.copyProperties(livroDTO, livro);
+        livro.setArquivo(file);
         livro.setStatus(Status.AGUARDANDO_REVISAO);
         return ResponseEntity.status(HttpStatus.CREATED).body(livroService.save(livro));
     }
@@ -83,6 +93,18 @@ public class LivroController {
                     "Nenhum livro foi encontrado.");
         }
         return ResponseEntity.status(HttpStatus.FOUND).body(livros);
+    }
+
+    @GetMapping("/page")
+    public ResponseEntity<Page<Livros>> findAllPage(
+            @PageableDefault(
+                    page = 2,
+                    size = 9,
+                    sort = "isbn",
+                    direction = Sort.Direction.DESC)
+            Pageable pageable
+    ) {
+        return ResponseEntity.ok(livroService.findAll(pageable));
     }
 
     @DeleteMapping("/{isbn}")

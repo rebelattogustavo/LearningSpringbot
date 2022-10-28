@@ -23,8 +23,6 @@ public class PessoaService {
         return pessoaRepository.save(entity);
     }
 
-
-
     public Optional<Pessoa> findById(Long cpf) {
         return pessoaRepository.findById(cpf);
     }

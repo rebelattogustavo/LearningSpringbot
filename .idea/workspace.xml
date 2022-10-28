@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16344e08-f77b-4d33-bb6c-3e00b1914db0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/editora-livros/src/main/java/br/senai/sc/editoralivros/repository/LivroRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/apiBetaAlmoxarif.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/apiBetaAlmoxarif.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/editora-livros/src/main/java/br/senai/sc/editoralivros/model/entity/Diretor.java" beforeDir="false" afterPath="$PROJECT_DIR$/editora-livros/src/main/java/br/senai/sc/editoralivros/model/entity/Diretor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/editora-livros/src/main/java/br/senai/sc/editoralivros/model/entity/Livros.java" beforeDir="false" afterPath="$PROJECT_DIR$/editora-livros/src/main/java/br/senai/sc/editoralivros/model/entity/Livros.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/editora-livros/src/main/java/br/senai/sc/editoralivros/model/service/LivroService.java" beforeDir="false" afterPath="$PROJECT_DIR$/editora-livros/src/main/java/br/senai/sc/editoralivros/model/service/LivroService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/editora-livros/src/main/java/br/senai/sc/editoralivros/model/service/PessoaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/editora-livros/src/main/java/br/senai/sc/editoralivros/model/service/PessoaService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +17,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -38,11 +36,31 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/editora-livros" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../EditoraLivros" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="coverage" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Teste" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="br.senai.sc.editoralivros.controller.Teste" />
+      <module name="apiBetaAlmoxarif" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.senai.sc.editoralivros.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Teste" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
