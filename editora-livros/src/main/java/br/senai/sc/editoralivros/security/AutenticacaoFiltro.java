@@ -2,6 +2,8 @@ package br.senai.sc.editoralivros.security;
 
 import br.senai.sc.editoralivros.model.entity.Pessoa;
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -26,11 +28,14 @@ public class AutenticacaoFiltro extends OncePerRequestFilter {
         Boolean valido = autenticacaoService.validarToken(token);
 
         if (valido){
-            Pessoa pessoa = autenticacaoService.getUsuario(token);
-
-        }else{
+            Pessoa usuario = autenticacaoService.getUsuario(token);
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(usuario.getUsername(),
+                    null, usuario.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        }else {
             response.setStatus(401);
         }
+        filterChain.doFilter(request, response);
     }
 
 }
