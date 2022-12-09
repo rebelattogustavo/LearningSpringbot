@@ -34,24 +34,26 @@ public class AutenticacaoConfig {
 
         httpSecurity.authorizeRequests()
                 // Permite acesso sem autenticação para \login
-                .antMatchers(HttpMethod.POST, "/login", "/editoralivros/pessoa/{tipo}").permitAll()
+                .antMatchers(HttpMethod.POST, "/editora-livros-api/login",
+                        "/editora-livros-api/usuario").permitAll()
                 // Determina que todas as outras requisições precisam de autenticação
                 .anyRequest().authenticated()
-//                .and().formLogin()
                 .and().csrf().disable()
-
                 .formLogin().permitAll()
+                    .loginPage("/editora-livros-api/login")
+                    .defaultSuccessUrl("/editora-livros-api/home")
                 .and()
                 .oauth2Login()
                     .userInfoEndpoint()
                         .userService(googleService)
-                    .and()
-                    .defaultSuccessUrl("/editoralivros/home")
                 .and()
-                .logout().permitAll()
+                    .loginPage("/editora-livros-api/login")
+                    .defaultSuccessUrl("/editora-livros-api/home")
                 .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().addFilterBefore(new AutenticacaoFiltro(jpaService), UsernamePasswordAuthenticationFilter.class);
+                .logout().permitAll();
+//                .and()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and().addFilterBefore(new AutenticacaoFiltro(jpaService), UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
 }

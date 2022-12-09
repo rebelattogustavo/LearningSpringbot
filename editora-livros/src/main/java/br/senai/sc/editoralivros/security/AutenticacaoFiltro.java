@@ -34,7 +34,7 @@ public class AutenticacaoFiltro extends OncePerRequestFilter {
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(usuario.getUsername(),
                     null, usuario.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
-        } else if (!request.getRequestURI().contains("/login")) {
+        } else if (!request.getRequestURI().contains("/editora-livros-api/login")){
             response.setStatus(401);
         }
         filterChain.doFilter(request, response);
