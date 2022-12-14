@@ -29,7 +29,7 @@ public class JpaService implements UserDetailsService {
         if (pessoa.isPresent()) {
             return new UserJPA(pessoa.get());
         }
-        throw new UsernameNotFoundException("Dados inválidos!");
+        throw new UsernameNotFoundException("Usuário não encontrado!");
     }
 
     public String gerarToken(Authentication authentication) {

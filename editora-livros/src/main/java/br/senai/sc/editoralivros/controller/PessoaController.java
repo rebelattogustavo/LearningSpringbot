@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/editoralivros/pessoa")
+@RequestMapping("/pessoa")
 public class PessoaController {
     PessoaService pessoaService;
 
@@ -29,6 +29,11 @@ public class PessoaController {
     public ResponseEntity<List<Pessoa>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(pessoaService.findAll());
     }
+
+//    public static void main(String[] args) {
+//        System.out.println(new BCryptPasswordEncoder().encode("123"));
+//
+//    }
 
     @PostMapping("/{tipo}")
     public ResponseEntity<Object> save(@PathVariable(name = "tipo") int tipo, @RequestBody @Valid PessoaDTO pessoaDTO) {
