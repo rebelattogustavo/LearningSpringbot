@@ -14,7 +14,7 @@
             <h1 class="display-3  text-white p-4">Cadastrar Usuário</h1>
         </header>
         <main>
-            <form class="mb-3 container" th:action="@{/editora-livros-api/pessoa/1}" method="post" th:object="${pessoa}">
+            <form class="mb-3 container" th:action="@{/editora-livros-api/pessoa}" method="post" th:object="${pessoa}">
                 <div class="mb-3">
                     <div class="ms-2 form-label fw-semibold">Nome</div>
                     <input type="text" id="nome" class="form-control" th:field="*{nome}"/>
@@ -33,9 +33,9 @@
                 </div>
                 <div class="mb-3">
                     <div class="ms-2 form-label fw-semibold">Gênero</div>
-                    <select id="genero" class="form-control" >
+                    <select id="genero" name="genero" class="form-control" >
                         <option disabled selected>Selecione um gênero</option>
-                        <option th:each="genero:${T(br.senai.sc.editoralivros.model.entity.Genero).values()}" th:text="${genero.nome}"></option>
+                        <option th:each="genero:${T(br.senai.sc.editoralivros.model.entity.Genero).values()}" th:value="${genero.name}" th:text="${genero.nome}"></option>
                     </select>
                 </div>
                 <div class="mb-3">

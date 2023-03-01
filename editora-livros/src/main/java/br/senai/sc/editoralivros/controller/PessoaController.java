@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/pessoa")
+@RequestMapping("/editora-livros-api/pessoa")
 public class PessoaController {
     PessoaService pessoaService;
 
@@ -56,8 +56,8 @@ public class PessoaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Tipo de pessoa inválido");
         }
         BeanUtils.copyProperties(pessoaDTO, pessoa);
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        pessoa.setSenha(encoder.encode(pessoa.getSenha()));
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        pessoa.setSenha(encoder.encode(pessoa.getSenha()));
         return ResponseEntity.status(HttpStatus.CREATED).body(pessoaService.save(pessoa));
     }
 

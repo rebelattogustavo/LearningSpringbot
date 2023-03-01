@@ -38,7 +38,7 @@ public class JpaService implements UserDetailsService {
                 .setIssuer("Editora de livros")
                 .setSubject(pessoa.getCpf().toString())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime() + 1800000))
+                .setExpiration(new Date(new Date().getTime() +  800000))
                 .signWith(SignatureAlgorithm.HS256, senhaForte)
                 .compact();
     }
