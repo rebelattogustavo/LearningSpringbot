@@ -1,6 +1,5 @@
 package br.senai.sc.editoralivros.security;
 
-import br.senai.sc.editoralivros.security.service.JpaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +18,7 @@ import javax.validation.Valid;
 @RequestMapping("/login")
 public class AutenticacaoController {
 
-    @Autowired
-    private JpaService autenticacaoService;
+    private TokenUtils tokenUtils = new TokenUtils();
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -32,10 +30,10 @@ public class AutenticacaoController {
                 new UsernamePasswordAuthenticationToken(usuarioDTO.getEmail(), usuarioDTO.getSenha());
         try{
             Authentication authentication = authenticationManager.authenticate(dadosLogin);
-            String token = autenticacaoService.gerarToken(authentication);
+            String token = tokenUtils.gerarToken(authentication);
             return ResponseEntity.status(HttpStatus.OK).body(new TokenDTO("Bearer", token));
         }catch (AuthenticationException e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario ou senha inválidos!");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 

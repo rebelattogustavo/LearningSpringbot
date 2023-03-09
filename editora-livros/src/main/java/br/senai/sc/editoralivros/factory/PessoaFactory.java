@@ -3,8 +3,8 @@ import br.senai.sc.editoralivros.dto.PessoaDTO;
 import br.senai.sc.editoralivros.model.entity.*;
 
 public class PessoaFactory {
-    public static Pessoa getPessoa(PessoaDTO pessoaDTO, int tipo) {
-        switch (tipo) {
+    public static Pessoa getPessoa(PessoaDTO pessoaDTO) {
+        switch (pessoaDTO.getTipo()) {
             case 1:
                 return new Autor(pessoaDTO.getCpf(), pessoaDTO.getNome(), pessoaDTO.getSobrenome(), pessoaDTO.getEmail(),
                         pessoaDTO.getSenha(), pessoaDTO.getGenero());

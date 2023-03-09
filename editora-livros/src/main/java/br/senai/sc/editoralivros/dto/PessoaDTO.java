@@ -15,4 +15,6 @@ public class PessoaDTO {
     private String email;
     private String senha;
     private Genero genero;
+
+    private int tipo;
 }

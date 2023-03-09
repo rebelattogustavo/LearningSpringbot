@@ -35,8 +35,8 @@ public class PessoaController {
 //
 //    }
 
-    @PostMapping("/{tipo}")
-    public ResponseEntity<Object> save(@PathVariable(name = "tipo") int tipo, @RequestBody @Valid PessoaDTO pessoaDTO) {
+    @PostMapping()
+    public ResponseEntity<Object> save(@RequestBody @Valid PessoaDTO pessoaDTO) {
         if(pessoaService.existsById(pessoaDTO.getCpf())) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(Collections.singletonMap("message", "CPF já cadastrado!"));
@@ -51,7 +51,7 @@ public class PessoaController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Este e-mail já está cadastrado");
         }
         PessoaFactory pessoaFactory = new PessoaFactory();
-        Pessoa pessoa = pessoaFactory.getPessoa(pessoaDTO, tipo);
+        Pessoa pessoa = pessoaFactory.getPessoa(pessoaDTO);
         if (pessoa == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Tipo de pessoa inválido");
         }
@@ -107,6 +107,6 @@ public class PessoaController {
                     .body("Não foi encontrado nenhum usuário com o CPF de: " + cpf);
         }
         pessoaService.deleteById(cpf);
-        return ResponseEntity.status(HttpStatus.OK).body("Usuário com o CPF de: " +cpf+ " foi deletado com sucesso");
+        return ResponseEntity.status(HttpStatus.OK).body("Usuário com o CPF de: " + cpf + " foi deletado com sucesso");
     }
 }
