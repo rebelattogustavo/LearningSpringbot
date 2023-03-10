@@ -6,7 +6,10 @@ import br.senai.sc.editoralivros.security.users.UserJPA;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.util.WebUtils;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 public class TokenUtils {
@@ -14,10 +17,10 @@ public class TokenUtils {
 
 
     public String gerarToken(Authentication authentication) {
-        Pessoa pessoa = (Pessoa) authentication.getPrincipal();
+        UserJPA userJPA = (UserJPA) authentication.getPrincipal();
         return Jwts.builder()
                 .setIssuer("Editora de livros")
-                .setSubject(pessoa.getCpf().toString())
+                .setSubject(userJPA.getPessoa().getCpf().toString())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() +  800000))
                 .signWith(SignatureAlgorithm.HS256, senhaForte)
@@ -36,5 +39,13 @@ public class TokenUtils {
     public Long getUsuarioCPF(String token) {
         return Long.parseLong(Jwts.parser().setSigningKey(senhaForte).parseClaimsJws(token).getBody().getSubject());
 //        return new UserJPA(pessoaRepository.findById(cpf).get());
+    }
+
+    public String buscarCookie(HttpServletRequest request) {
+        Cookie cookie = WebUtils.getCookie(request, "jwt");
+        if (cookie != null) {
+            return cookie.getValue();
+        }
+        throw new RuntimeException("Cookie não encontrado!");
     }
 }

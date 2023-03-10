@@ -49,7 +49,7 @@ public class AutenticacaoConfig {
         httpSecurity.authorizeRequests()
                 // Permite acesso sem autenticação para \login
                 .antMatchers("/editora-livros-api/login",
-                        "/editora-livros-api/usuario", "/editora-livros-api/pessoa").permitAll()
+                        "/editora-livros-api/usuario", "/editora-livros-api/pessoa", "/login", "/login/auth").permitAll()
                 // Determina que todas as outras requisições precisam de autenticação
                 .anyRequest().authenticated();
         httpSecurity.csrf().disable()
