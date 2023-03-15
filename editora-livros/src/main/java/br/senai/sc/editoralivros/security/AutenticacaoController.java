@@ -36,6 +36,7 @@ public class AutenticacaoController {
             Authentication authentication = authenticationManager.authenticate(dadosLogin);
             String token = tokenUtils.gerarToken(authentication);
             Cookie cookie = new Cookie("jwt", token);
+            cookie.setPath("/");
             UserJPA userJPA = (UserJPA) authentication.getPrincipal();
             Pessoa pessoa = userJPA.getPessoa();
             response.addCookie(cookie);
