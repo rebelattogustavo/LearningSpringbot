@@ -34,13 +34,9 @@ public class AutenticacaoController {
                 new UsernamePasswordAuthenticationToken(usuarioDTO.getEmail(), usuarioDTO.getSenha());
         try{
             Authentication authentication = authenticationManager.authenticate(dadosLogin);
-            String token = tokenUtils.gerarToken(authentication);
-            Cookie cookie = new Cookie("jwt", token);
-            cookie.setPath("/");
+            response.addCookie(tokenUtils.gerarCookie(authentication));
             UserJPA userJPA = (UserJPA) authentication.getPrincipal();
-            Pessoa pessoa = userJPA.getPessoa();
-            response.addCookie(cookie);
-            return ResponseEntity.ok().body(pessoa);
+            return ResponseEntity.ok().body(userJPA.getPessoa());
         }catch (AuthenticationException e){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

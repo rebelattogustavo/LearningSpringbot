@@ -30,6 +30,7 @@ public class AutenticacaoFiltro extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
+
 //        String token = request.getHeader("Authorization");
 //        if (token != null && token.startsWith("Bearer ")){
 //            token = token.substring(7);
